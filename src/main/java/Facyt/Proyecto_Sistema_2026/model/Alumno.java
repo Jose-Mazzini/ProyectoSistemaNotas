@@ -27,7 +27,7 @@ public class Alumno {
             joinColumns = @JoinColumn(name = "alumno_id"),
             inverseJoinColumns = @JoinColumn (name = "materia_id")
     )
-    private Set <Materias> materias = new HashSet<>();
+    private Set <Materia> materias = new HashSet<>();
 }
 
 

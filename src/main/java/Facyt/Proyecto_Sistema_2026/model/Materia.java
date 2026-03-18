@@ -1,5 +1,5 @@
 package Facyt.Proyecto_Sistema_2026.model;
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -12,10 +12,11 @@ import java.util.Set;
 @NoArgsConstructor
 @ToString
 @Entity
-public class Materias {
+public class Materia {
 
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY )
+
 
     private Integer idMateria;
     private String nombreMateria;
