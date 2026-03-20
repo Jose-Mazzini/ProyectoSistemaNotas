@@ -14,7 +14,7 @@ import java.util.Set;
 
 
 @Entity
-public class Alumno extends Persona {
+public class Alumno extends Persona{
 @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "alumno_materias",
