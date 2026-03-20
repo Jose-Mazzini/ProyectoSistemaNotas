@@ -14,13 +14,7 @@ import java.util.Set;
 
 
 @Entity
-public class Alumno {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idAlumno;
-    private String nombre;
-    private String apellido;
-    private String email;
+public class Alumno extends Persona{
 @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "alumno_materias",
@@ -29,9 +23,3 @@ public class Alumno {
     )
     private Set <Materia> materias = new HashSet<>();
 }
-
-
-
-
-
-
