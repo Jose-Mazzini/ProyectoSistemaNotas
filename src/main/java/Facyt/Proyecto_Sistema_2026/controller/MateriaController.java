@@ -1,59 +1,74 @@
 package Facyt.Proyecto_Sistema_2026.controller;
 
 import Facyt.Proyecto_Sistema_2026.model.Materia;
-import Facyt.Proyecto_Sistema_2026.repository.IMateriaRepository;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import Facyt.Proyecto_Sistema_2026.service.IMateriaService;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
-@RestController
+@Controller
 @RequestMapping("/materias")
-
 public class MateriaController {
-    @Autowired
-    private IMateriaRepository materiaRepository;
 
-    // Obtener materia
+    private final IMateriaService materiaService;
+
+    public MateriaController(IMateriaService materiaService) {
+        this.materiaService = materiaService;
+    }
+
+    // LISTAR
     @GetMapping
-    public List<Materia> getAllMaterias() {
-        return materiaRepository.findAll();
+    public String listarMaterias(Model model) {
+        model.addAttribute("materias", materiaService.findAll());
+        return "materias/listar";
     }
 
-    //  Obtener  materia por ID
+    // FORM NUEVO
+    @GetMapping("/nuevo")
+    public String nuevaMateria(Model model) {
+        model.addAttribute("materia", new Materia());
+        return "materias/formulario";
+    }
+
+    // FORM EDITAR
+    @GetMapping("/editar/{id}")
+    public String editarMateria(@PathVariable Integer id, Model model) {
+        Materia materia = materiaService.findById(id);
+
+        if (materia == null) {
+            return "redirect:/materias";
+        }
+
+        model.addAttribute("materia", materia);
+        return "materias/formulario";
+    }
+
+    // GUARDAR (CREAR / EDITAR)
+    @PostMapping("/guardar")
+    public String guardar(@ModelAttribute Materia materia) {
+        materiaService.save(materia);
+        return "redirect:/materias";
+    }
+
+    // ELIMINAR
+    @GetMapping("/eliminar/{id}")
+    public String eliminar(@PathVariable Integer id) {
+        materiaService.deleteById(id);
+        return "redirect:/materias";
+    }
+
+    // DETALLE
     @GetMapping("/{id}")
-    public Optional<Materia> getMateriaById(@PathVariable Integer id) {
-        return materiaRepository.findById(id);
-    }
+    public String verDetalle(@PathVariable Integer id, Model model) {
+        Materia materia = materiaService.findById(id);
 
-    //  Crear materia
-    @PostMapping
-    public Materia createMateria(@RequestBody Materia materia) {
-        return materiaRepository.save(materia);
-    }
+        if (materia == null) {
+            return "redirect:/materias";
+        }
 
-    // Actualizar materia
-    @PutMapping("/{id}")
-    public Materia updateMateria(@PathVariable Integer id, @RequestBody Materia materiaActualizada) {
-        return materiaRepository.findById(id)
-                .map(materia -> {
-                    materia.setNombreMateria(materiaActualizada.getNombreMateria());
-                    materia.setCalificacion(materiaActualizada.getCalificacion());
-                    materia.setDiaMateria(materiaActualizada.getDiaMateria());
-                    materia.setHoraMateria(materiaActualizada.getHoraMateria());
-                    return materiaRepository.save(materia);
-                })
-                .orElseGet(() -> {
-                    materiaActualizada.setIdMateria(id);
-                    return materiaRepository.save(materiaActualizada);
-                });
-    }
-
-    // fulminar
-    @DeleteMapping("/{id}")
-    public void deleteMateria(@PathVariable Integer id) {
-        materiaRepository.deleteById(id);
+        model.addAttribute("materia", materia);
+        return "materias/detalle";
     }
 }

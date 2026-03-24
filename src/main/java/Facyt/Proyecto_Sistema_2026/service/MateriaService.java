@@ -10,20 +10,29 @@ import java.util.List;
 public class MateriaService implements IMateriaService {
     @Autowired
     private IMateriaRepository materiaRepository;
+
     @Override
-    public List<Materia> listarMaterias() {
+    public List<Materia> findAll() {
         return materiaRepository.findAll();
     }
 
     @Override
-    public void agregarMateria(Materia materia) {
+    public Materia findById(Integer id) {
+        return materiaRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public void save(Materia materia) {
         materiaRepository.save(materia);
     }
 
     @Override
-    public void eliminarMateria(Materia materia) {
-       materiaRepository.delete(materia);
+    public void deleteById(Integer id) {
+        materiaRepository.deleteById(id);
     }
 
-
+    @Override
+    public List<Materia> findAllById(List<Integer> ids) {
+        return materiaRepository.findAllById(ids);
+    }
 }
