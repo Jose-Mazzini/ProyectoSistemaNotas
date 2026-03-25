@@ -21,7 +21,8 @@ public class MateriaController {
     // LISTAR
     @GetMapping
     public String listarMaterias(Model model) {
-        model.addAttribute("materias", materiaService.findAll());
+        List<Materia> materias = materiaService.findAll();
+        model.addAttribute("materias", materias);
         return "materias/listar";
     }
 

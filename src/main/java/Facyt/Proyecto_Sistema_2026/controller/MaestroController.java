@@ -1,6 +1,7 @@
 package Facyt.Proyecto_Sistema_2026.controller;
 
 import Facyt.Proyecto_Sistema_2026.model.Maestro;
+import Facyt.Proyecto_Sistema_2026.model.MaestroMateria;
 import Facyt.Proyecto_Sistema_2026.model.Materia;
 import Facyt.Proyecto_Sistema_2026.service.IMaestroService;
 import Facyt.Proyecto_Sistema_2026.service.IMateriaService;
@@ -54,9 +55,18 @@ public class MaestroController {
     public String guardar(@ModelAttribute Maestro maestro,
                           @RequestParam(required = false) List<Integer> materiasIds) {
 
+        maestro.getMaestroMaterias().clear();
+
         if (materiasIds != null) {
             List<Materia> materias = materiaService.findAllById(materiasIds);
-            maestro.setMaterias(new HashSet<>(materias));
+
+            for (Materia materia : materias) {
+                MaestroMateria mm = new MaestroMateria();
+                mm.setMaestro(maestro);
+                mm.setMateria(materia);
+
+                maestro.getMaestroMaterias().add(mm);
+            }
         }
 
         maestroService.save(maestro);
