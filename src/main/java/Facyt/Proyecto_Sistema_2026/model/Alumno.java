@@ -15,11 +15,6 @@ import java.util.Set;
 
 @Entity
 public class Alumno extends Persona{
-@ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "alumno_materias",
-            joinColumns = @JoinColumn(name = "alumno_id"),
-            inverseJoinColumns = @JoinColumn (name = "materia_id")
-    )
-    private Set <Materia> materias = new HashSet<>();
+@OneToMany(mappedBy = "alumno")
+    private Set<Inscripciones> inscripciones = new HashSet<>();
 }

@@ -20,11 +20,13 @@ public class Materia {
 
     private Integer idMateria;
     private String nombreMateria;
-    private int calificacion;
     private String diaMateria;
     private String horaMateria;
 
- @ManyToMany (mappedBy = "materias", fetch = FetchType.EAGER)
-    private Set<Alumno> alumnos = new HashSet<>();
+ @OneToMany(mappedBy = "materia")
+    Set<Inscripciones> inscripciones = new HashSet<>();
+
+ @OneToMany(mappedBy = "materia")
+    Set<MaestroMateria> maestroMaterias = new HashSet<>();
 
 }

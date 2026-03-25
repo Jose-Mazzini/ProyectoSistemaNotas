@@ -60,7 +60,7 @@ public class MateriaController {
     }
 
     // DETALLE
-    @GetMapping("/{id}")
+    @GetMapping("/detalle/{id}")
     public String verDetalle(@PathVariable Integer id, Model model) {
         Materia materia = materiaService.findById(id);
 
