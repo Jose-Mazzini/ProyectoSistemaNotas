@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Notas - Inicio</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,.2);
+            transition: transform 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 50px rgba(0,0,0,.3);
+        }
+        .card-body {
+            padding: 2rem;
+            text-align: center;
+        }
+        .icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        .icon-alumnos {
+            color: #667eea;
+        }
+        .icon-maestros {
+            color: #764ba2;
+        }
+        .icon-materias {
+            color: #f093fb;
+        }
+        h1 {
+            color: white;
+            margin-bottom: 3rem;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center mb-5">
+            <i class="fas fa-graduation-cap me-2"></i>Sistema de Gestión de Notas
+        </h1>
+
+        <div class="row g-4">
+            <!-- Tarjeta de Alumnos -->
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="icon icon-alumnos">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h5 class="card-title">Alumnos</h5>
+                        <p class="card-text text-muted">Gestiona el registro de alumnos y sus materias</p>
+                        <a href="/alumnos" class="btn btn-primary">
+                            <i class="fas fa-arrow-right me-2"></i>Ir a Alumnos
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tarjeta de Maestros -->
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="icon icon-maestros">
+                            <i class="fas fa-chalkboard-user"></i>
+                        </div>
+                        <h5 class="card-title">Maestros</h5>
+                        <p class="card-text text-muted">Gestiona el registro de maestros y sus materias</p>
+                        <a href="/maestros" class="btn btn-primary">
+                            <i class="fas fa-arrow-right me-2"></i>Ir a Maestros
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tarjeta de Materias -->
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="icon icon-materias">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <h5 class="card-title">Materias</h5>
+                        <p class="card-text text-muted">Gestiona el catálogo de materias del sistema</p>
+                        <a href="/materias" class="btn btn-primary">
+                            <i class="fas fa-arrow-right me-2"></i>Ir a Materias
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+

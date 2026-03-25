@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${maestro.id != null ? 'Editar Maestro' : 'Nuevo Maestro'}"></title>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h5>
+                        <span th:text="${maestro.id != null ? 'Editar Maestro' : 'Nuevo Maestro'}"></span>
+                    </h5>
+                </div>
+
+                <div class="card-body">
+
+                    <form th:action="@{/maestros/guardar}" th:object="${maestro}" method="POST">
+
+                        <input type="hidden" th:field="*{id}">
+
+                        <div class="mb-3">
+                            <label>Nombre</label>
+                            <input type="text" class="form-control" th:field="*{nombre}" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label>Apellido</label>
+                            <input type="text" class="form-control" th:field="*{apellido}" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label>Email</label>
+                            <input type="email" class="form-control" th:field="*{email}" required>
+                        </div>
+
+                        <!-- 🔥 MATERIAS CORREGIDO -->
+                        <div class="mb-3">
+                            <label>Materias</label>
+
+                            <select class="form-select" name="materiasIds" multiple>
+
+                                <option th:each="materia : ${materias}"
+                                        th:value="${materia.idMateria}"
+                                        th:text="${materia.nombreMateria}"
+                                        th:selected="${maestro.materias != null && maestro.materias.contains(materia)}">
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                        <button class="btn btn-primary">Guardar</button>
+                        <a href="/maestros" class="btn btn-secondary">Cancelar</a>
+
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

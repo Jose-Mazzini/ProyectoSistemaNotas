@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${materia.idMateria != null ? 'Editar Materia' : 'Nueva Materia'}"></title>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .navbar {
+            box-shadow: 0 2px 4px rgba(0,0,0,.1);
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container">
+        <a class="navbar-brand" href="/">
+            <i class="fas fa-graduation-cap"></i> Sistema de Notas
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/alumnos">Alumnos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/maestros">Maestros</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="/materias">Materias</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- CONTENIDO -->
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">
+                        <i class="fas"
+                           th:classappend="${materia.idMateria != null ? 'fa-edit' : 'fa-book'}"></i>
+
+                        <span th:text="${materia.idMateria != null ? 'Editar Materia' : 'Nueva Materia'}"></span>
+                    </h5>
+                </div>
+
+                <div class="card-body">
+                    <form th:action="@{/materias/guardar}" th:object="${materia}" method="POST">
+
+                        <!-- ID oculto -->
+                        <input type="hidden" th:field="*{idMateria}">
+
+                        <!-- NOMBRE -->
+                        <div class="mb-3">
+                            <label class="form-label">Nombre de la Materia *</label>
+                            <input type="text" class="form-control"
+                                   th:field="*{nombreMateria}" required>
+                        </div>
+
+
+                        <!-- DIA -->
+                        <div class="mb-3">
+                            <label class="form-label">Día *</label>
+                            <input type="text" class="form-control"
+                                   th:field="*{diaMateria}" placeholder="Ej: Lunes" required>
+                        </div>
+
+                        <!-- HORA -->
+                        <div class="mb-3">
+                            <label class="form-label">Hora *</label>
+                            <input type="time" class="form-control"
+                                   th:field="*{horaMateria}" required>
+                        </div>
+
+                        <!-- BOTONES -->
+                        <div class="d-grid gap-2 d-md-flex">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i> Guardar
+                            </button>
+
+                            <a href="/materias" class="btn btn-secondary">
+                                <i class="fas fa-times"></i> Cancelar
+                            </a>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
