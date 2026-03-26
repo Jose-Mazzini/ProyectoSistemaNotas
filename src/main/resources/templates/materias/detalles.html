@@ -1,10 +1,138 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalles de la Materia</title>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .navbar {
+            box-shadow: 0 2px 4px rgba(0,0,0,.1);
+        }
+    </style>
 </head>
 <body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container">
+        <a class="navbar-brand" href="/">
+            <i class="fas fa-graduation-cap"></i> Sistema de Notas
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/alumnos">Alumnos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/maestros">Maestros</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="/materias">Materias</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Contenido -->
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">
+                        <i class="fas fa-book"></i> Detalles de la Materia
+                    </h5>
+                </div>
+
+                <div class="card-body">
+
+                    <!-- ID -->
+                    <div class="row mb-3">
+                        <div class="col-sm-4">
+                            <h6 class="text-muted">ID</h6>
+                        </div>
+                        <div class="col-sm-8">
+                            <p th:text="${materia.idMateria}"></p>
+                        </div>
+                    </div>
+
+                    <!-- Nombre -->
+                    <div class="row mb-3">
+                        <div class="col-sm-4">
+                            <h6 class="text-muted">Nombre</h6>
+                        </div>
+                        <div class="col-sm-8">
+                            <p th:text="${materia.nombreMateria}"></p>
+                        </div>
+                    </div>
+
+                    <!-- Día -->
+                    <div class="row mb-3">
+                        <div class="col-sm-4">
+                            <h6 class="text-muted">Día</h6>
+                        </div>
+                        <div class="col-sm-8">
+                            <p th:text="${materia.diaMateria}"></p>
+                        </div>
+                    </div>
+
+                    <!-- Hora -->
+                    <div class="row mb-4">
+                        <div class="col-sm-4">
+                            <h6 class="text-muted">Hora</h6>
+                        </div>
+                        <div class="col-sm-8">
+                            <p th:text="${materia.horaMateria}"></p>
+                        </div>
+                    </div>
+
+                    <!-- Maestros -->
+                    <div class="row mb-4">
+                        <div class="col-sm-4">
+                            <h6 class="text-muted">Maestros</h6>
+                        </div>
+                        <div class="col-sm-8">
+                            <div>
+                                <span th:each="mm : ${materia.maestroMaterias}" class="badge bg-success me-1">
+                                    <span th:text="${mm.maestro.nombre + ' ' + mm.maestro.apellido}"></span>
+                                </span>
+
+                                <span th:if="${#lists.isEmpty(materia.maestroMaterias)}" class="text-muted">
+                                    Sin maestros asignados
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Botón volver -->
+                    <div class="d-grid">
+                        <a href="/materias" class="btn btn-secondary">
+                            <i class="fas fa-arrow-left"></i> Volver
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>

@@ -87,8 +87,8 @@
                             <td th:text="${maestro.apellido}"></td>
                             <td th:text="${maestro.email}"></td>
                             <td>
-                                <span th:each="materia : ${maestro.materias}" class="badge bg-success me-1">
-                                    <span th:text="${materia.nombreMateria}"></span>
+                                <span th:each="mm : ${maestro.maestroMaterias}" class="badge bg-success me-1">
+                                    <span th:text="${mm.materia.nombreMateria}"></span>
                                 </span>
                             </td>
                             <td>

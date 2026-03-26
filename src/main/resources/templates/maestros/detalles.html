@@ -105,13 +105,14 @@
                             </div>
                         </div>
 
-                        <div class="d-grid gap-2 d-md-flex">
-                            <a th:href="@{/maestros/editar/{id}(id=${maestro.id})}" class="btn btn-warning">
-                                <i class="fas fa-edit"></i> Editar
-                            </a>
-                            <a href="/maestros" class="btn btn-secondary">
-                                <i class="fas fa-arrow-left"></i> Volver
-                            </a>
+                        <div>
+                            <span th:each="mm : ${maestro.maestroMaterias}" class="badge bg-success me-1">
+                                <span th:text="${mm.materia.nombreMateria}"></span>
+                            </span>
+
+                            <span th:if="${#lists.isEmpty(maestro.maestroMaterias)}" class="text-muted">
+                                Sin materias asignadas
+                            </span>
                         </div>
                     </div>
                 </div>

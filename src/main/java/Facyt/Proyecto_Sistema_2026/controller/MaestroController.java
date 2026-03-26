@@ -88,6 +88,6 @@ public class MaestroController {
         }
 
         model.addAttribute("maestro", maestro);
-        return "maestros/detalle";
+        return "maestros/detalles";
     }
 }
