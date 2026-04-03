@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Alumnos</title>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container mt-4">
+
+    <h2>Lista de Alumnos</h2>
+
+    <a href="/alumnos/nuevo" class="btn btn-primary mb-3">Nuevo Alumno</a>
+
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Email</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="alumno : ${alumnos}">
+            <td th:text="${alumno.id}"></td>
+            <td th:text="${alumno.nombre}"></td>
+            <td th:text="${alumno.apellido}"></td>
+            <td th:text="${alumno.email}"></td>
+
+            <td>
+                <a th:href="@{'/alumnos/' + ${alumno.id}}" class="btn btn-info btn-sm">Ver</a>
+                <a th:href="@{'/alumnos/editar/' + ${alumno.id}}" class="btn btn-warning btn-sm">Editar</a>
+                <a th:href="@{'/alumnos/eliminar/' + ${alumno.id}}" class="btn btn-danger btn-sm">Eliminar</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+
+</body>
+</html>
